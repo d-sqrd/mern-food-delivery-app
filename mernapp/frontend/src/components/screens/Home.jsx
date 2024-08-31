@@ -11,6 +11,7 @@ const Home = () => {
   const [foodCategory, setFoodCategory] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
   const [search, setSearch] = useState("");
+
   const loadData = async () => {
     let response = await fetch("http://localhost:5000/api/fooddata", {
       method: "POST",
@@ -19,6 +20,7 @@ const Home = () => {
       },
     });
     response = await response.json();
+    console.log(`FOOD_DATA_RES = ${JSON.stringify(response)}`);
     setFoodCategory(response.foodCategory);
     setFoodItems(response.foodItems);
   };
@@ -133,8 +135,13 @@ const Home = () => {
                             className="col-12 col-md-6 col-lg-3"
                           >
                             {/* <div>{filteredFoodItem.name}</div> */}
-                            <Card
+                            {/* <Card
                               foodName={filteredFoodItem.name}
+                              options={filteredFoodItem.options[0]}
+                              imgSrc={filteredFoodItem.img}
+                            /> */}
+                            <Card
+                              foodItem={filteredFoodItem}
                               options={filteredFoodItem.options[0]}
                               imgSrc={filteredFoodItem.img}
                             />

@@ -4,8 +4,9 @@ const User = require("../model/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-const jwtSecret = "helloWord$123";
+// const jwtSecret = "helloWord$123";
 
 router.post(
   "/createuser",
@@ -61,7 +62,7 @@ router.post(
           .status(400)
           .json({ message: "Please enter valid login credentials!" });
       }
-      const pwdCompare = await bcrypt.compare(req.body.password, user.password);
+      const pwdCompare = await bcrypt.compare(password, user.password);
       if (!pwdCompare) {
         return res
           .status(400)
@@ -72,7 +73,7 @@ router.post(
           id: user.id,
         },
       };
-      const authToken = jwt.sign(data, jwtSecret);
+      const authToken = jwt.sign(data, process.env.JWT_SECRET);
       return res.status(200).json({ success: true, authToken: authToken });
     } catch (error) {
       console.log(error);

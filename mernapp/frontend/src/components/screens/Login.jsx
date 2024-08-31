@@ -80,3 +80,7 @@ const Login = () => {
 };
 
 export default Login;
+
+// sample login creds:
+// email: dev@dev3.com
+// password: 12345
