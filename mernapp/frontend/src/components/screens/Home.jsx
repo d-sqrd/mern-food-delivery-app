@@ -20,7 +20,7 @@ const Home = () => {
       },
     });
     response = await response.json();
-    console.log(`FOOD_DATA_RES = ${JSON.stringify(response)}`);
+    console.log(`FOOD_DATA_RES = ${JSON.stringify(response.foodItems)}`);
     setFoodCategory(response.foodCategory);
     setFoodItems(response.foodItems);
   };
@@ -129,6 +129,7 @@ const Home = () => {
                             .includes(search.toLocaleLowerCase())
                       )
                       .map((filteredFoodItem, index2) => {
+                        console.log("filteredFoodItem", filteredFoodItem);
                         return (
                           <div
                             key={index2}
@@ -139,11 +140,12 @@ const Home = () => {
                               foodName={filteredFoodItem.name}
                               options={filteredFoodItem.options[0]}
                               imgSrc={filteredFoodItem.img}
+                              filteredFoodItem={filteredFoodItem}
                             /> */}
                             <Card
                               foodItem={filteredFoodItem}
                               options={filteredFoodItem.options[0]}
-                              imgSrc={filteredFoodItem.img}
+                              // imgSrc={filteredFoodItem.img}
                             />
                           </div>
                         );
