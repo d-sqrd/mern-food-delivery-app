@@ -7,28 +7,65 @@ const Card = (props) => {
   const priceRef = useRef();
   let dispatch = useDispatchCart();
   let data = useCart();
-  console.log("FOOD_ITEM_CARD_JSX = ", foodItem?.CategoryName);
+  // console.log("FOOD_ITEM_CARD_JSX = ", options);
   let priceOptions;
   if (options) {
     priceOptions = Object.keys(options);
   }
 
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("");
   const handleAddToCart = async () => {
+    let food = [];
+    for (const item of data) {
+      console.log(`food = ${JSON.stringify(item)}`);
+      console.log(`typeof(food) = ${typeof food}`);
+      if (item.id === foodItem?._id) {
+        food = item;
+        break;
+      }
+    }
+    if (Object.keys(food).length !== 0) {
+      if (size && food?.size === size) {
+        console.log(`inside IF - UPDATE called`);
+        await dispatch({
+          type: "UPDATE",
+          id: foodItem?._id,
+          price: finalPrice,
+          quantity: quantity,
+        });
+        return;
+      } else if (food?.size !== size) {
+        console.log(`inside IF - ADD called`);
+        await dispatch({
+          type: "ADD",
+          id: foodItem?._id,
+          name: foodItem?.name,
+          img: foodItem?.img,
+          price: finalPrice,
+          quantity: quantity,
+          size: size,
+        });
+        return;
+      }
+      return;
+    }
     await dispatch({
       type: "ADD",
       id: foodItem?._id,
       name: foodItem?.name,
       img: foodItem?.img,
-      price: foodItem?.price,
+      price: finalPrice,
       quantity: quantity,
       size: size,
     });
     console.log("DATA", data);
   };
   // let foodItem = props.foodItem;
-  let finalPrice = quantity * parseInt(options[size]);
+  let finalPrice = 0;
+  if (size) {
+    finalPrice = quantity * parseInt(options[size]);
+  }
   useEffect(() => {
     setSize(priceRef.current.value);
   }, []);

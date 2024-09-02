@@ -20,7 +20,7 @@ const Home = () => {
       },
     });
     response = await response.json();
-    console.log(`FOOD_DATA_RES = ${JSON.stringify(response.foodItems)}`);
+    // console.log(`FOOD_DATA_RES = ${JSON.stringify(response.foodItems)}`);
     setFoodCategory(response.foodCategory);
     setFoodItems(response.foodItems);
   };
@@ -129,7 +129,7 @@ const Home = () => {
                             .includes(search.toLocaleLowerCase())
                       )
                       .map((filteredFoodItem, index2) => {
-                        console.log("filteredFoodItem", filteredFoodItem);
+                        // console.log("filteredFoodItem", filteredFoodItem);
                         return (
                           <div
                             key={index2}
