@@ -34,6 +34,9 @@ const reducer = (state, action) => {
         return arr;
       });
       return arr;
+    case "DROP":
+      const emptyArr = [];
+      return emptyArr;
     default:
       console.log("Error in reducer!!!");
       break;

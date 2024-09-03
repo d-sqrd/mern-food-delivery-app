@@ -25,6 +25,7 @@ const Login = () => {
       alert("Please enter valid credentials for signing up!");
     }
     if (respJson.success) {
+      localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("authToken", respJson.authToken);
       console.log(
         `AUTH_TOKEN_LOCAL_STORAGE = ${localStorage.getItem("authToken")}`

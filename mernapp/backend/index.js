@@ -6,6 +6,7 @@ const mongoDB = require("./db");
 
 const createUserRoute = require("./routes/CreateUser");
 const displayDataRoute = require("./routes/DisplayData");
+const orderDataRoute = require("./routes/OrderData");
 
 mongoDB();
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use("/api", createUserRoute);
 app.use("/api", displayDataRoute);
+app.use("/api", orderDataRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is listening at PORT = ${PORT}`);

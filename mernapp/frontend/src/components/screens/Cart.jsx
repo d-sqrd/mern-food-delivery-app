@@ -12,7 +12,25 @@ const Cart = () => {
     );
   }
 
-  const handleCheckOut = () => {};
+  const handleCheckOut = async () => {
+    const userEmail = localStorage.getItem("userEmail");
+    console.log(`handle-cart-checkout-data = ${JSON.stringify(data)}`);
+    const response = await fetch("http://localhost:5000/api/orderData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        orderData: data,
+        email: userEmail,
+        orderDate: new Date().toDateString(),
+      }),
+    });
+    console.log(`resp-handle-cart-checkout: ${response}`);
+    if (response.status === 200) {
+      await dispatch({ type: "DROP" });
+    }
+  };
 
   let totalPrice = data.reduce((total, food) => total + food.price, 0);
   return (

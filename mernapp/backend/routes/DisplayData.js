@@ -15,7 +15,7 @@ router.post("/fooddata", async (req, res) => {
     //   "foodCategory"
     // );
     const foodCategory = await FoodCategory.find({});
-    console.log(`FOODCATEGORY = ${foodCategory}`);
+    // console.log(`FOODCATEGORY = ${foodCategory}`);
     // console.log(`$$$FOOD_ITEMS = ${foodCategory}`);
     res.json({ foodCategory: foodCategory, foodItems: foodItems });
   } catch (err) {
